@@ -19,6 +19,18 @@ You should also:
   - Use 2captcha.com Sandbox mode (for developers) for image selection challenges.
   - Use proxy settings for test automation running (not required, but recommended).
   
+# Why do we need 2captcha.com API services?
+
+Because, you can not fight with Google. You need to analyze and decide to answer like a human. If you have a software that has artificial intelligence and learns continuously, everything changes. All of these solutions are of course paid.
+
+#### 2captcha.com solves different types of captchas:
+Normal Captcha, Text Captcha, ReCaptcha V2, ReCaptcha V3, GeeTest, ReCaptcha V2 (old method), Solving ClickCaptcha, RotateCaptcha, FunCaptcha, FunCaptcha Token Method, KeyCaptcha, hCaptcha
+
+#### Other popular alternatives
+- anti-captcha.com
+- deathbycaptcha.com
+- azcaptcha.com
+  
 # How to configure?
 ##### Chrome Browser Driver
 

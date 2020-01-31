@@ -59,5 +59,8 @@ If it is possible to do this just showing it to the community to raise awareness
 What they can do: Bulk ticket purchases, limited number of product purchases, creating bot accounts
 
 ##### References:
+
 https://github.com/2captcha/2captcha-api-examples
+
 https://2captcha.com/
+

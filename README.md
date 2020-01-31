@@ -26,6 +26,14 @@ Because, you can not fight with Google. You need to analyze and decide to answer
 #### 2captcha.com solves different types of captchas:
 Normal Captcha, Text Captcha, ReCaptcha V2, ReCaptcha V3, GeeTest, ReCaptcha V2 (old method), Solving ClickCaptcha, RotateCaptcha, FunCaptcha, FunCaptcha Token Method, KeyCaptcha, hCaptcha
 
+#### To start using 2captcha.com service:
+Service provides an API that allows you to solve different types of captchas.
+
+- Register 2captcha.com
+- Implement 2captcha.com API
+- Send 2captcha.com your CAPTCHAs
+- Get your answer / directions as text.
+
 #### Other popular alternatives
 - anti-captcha.com
 - deathbycaptcha.com

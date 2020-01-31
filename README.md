@@ -1,6 +1,6 @@
 # Google Recaptcha Solver Selenium Test Automation
 
-![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/bots.png)![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/recaptcha.png)![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/imnotarobot)
+![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/bots.png)![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/recaptcha.png)![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/imnotarobot.png)
 
 2Captcha.com's API used for solving Google's Invisible Recaptcha and Recaptcha v2 with Java Selenium Chrome Browser Test Automation.
 

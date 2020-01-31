@@ -54,6 +54,9 @@ proxyPw=password
 # How to run?
   That's a junit-java-maven-selenium Webdriver project. Default Test folder is "src\test\java\tests\Recaptcha2Test.java" just right click on IntelliJ's project explorer window or run it from command line with maven command.
   
+  #### Warning: 
+  I cannot guarantee that it will always work. However, I developed necessary implementations for possible scenarios. Response times from 2captcha.com should take between 30-90 seconds depending on your settings at 2captcha.com. https://2captcha.com/setting/percent_100
+  
 # What is the motivation behind this project?
 If it is possible to do this just showing it to the community to raise awareness. 
 What they can do: Bulk ticket purchases, limited number of product purchases, creating bot accounts

@@ -3,7 +3,6 @@ package pages;
 import api.TwoCaptchaService;
 import base.DriverBase;
 import base.PropertyLoader;
-import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.io.FileHandler;
@@ -26,6 +25,7 @@ public class Recaptcha2Page extends DriverBase {
     public Recaptcha2Page(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
+
     private Boolean isCaptchaInvisible = Boolean.FALSE;
     private Point locationOfIFrame;
     private PropertyLoader prop = new PropertyLoader();
@@ -61,39 +61,10 @@ public class Recaptcha2Page extends DriverBase {
             locationOfIFrame = newIframeList.get(0).getLocation();
             System.out.println("X: " + locationOfIFrame.x + "; Y: " + locationOfIFrame.y);
             new WebDriverWait(driver, 10).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[starts-with(@name, 'c-') and starts-with(@src, 'https://www.google.com/recaptcha')]")));
-            List<WebElement> rowsOfTheImageElement = driver.findElements(By.xpath("//*[@id='rc-imageselect-target']/table/tbody/tr"));
-            List<WebElement> colsOfTheImageElement = driver.findElements(By.xpath("//*[@id='rc-imageselect-target']/table/tbody/tr[1]/td"));
-            System.out.println("Captcha size: " + rowsOfTheImageElement.size() + "x" + colsOfTheImageElement.size());
-            List<WebElement> newImageFileElementList = driver.findElements(By.className("rc-imageselect-challenge"));
-            List<WebElement> newImageInstructionsElementList = driver.findElements(By.className("rc-imageselect-instructions"));
-            takeScreenShotForRecaptcha(newImageFileElementList, "imageFile", 100, 100);
-            takeScreenShotForRecaptcha(newImageInstructionsElementList, "imageInstructions", 0, 0);
-            System.out.println("CHECK select all squares");
-            String myResponse = solveImageRecatpcha(false, pageUrl, true, false, "", rowsOfTheImageElement.size(), colsOfTheImageElement.size());
-            System.out.println(myResponse);
-            myResponse = myResponse.replace("click:", "");
-            String[] numbers = myResponse.split("/");
-            List<String> numberList = Arrays.asList(numbers);
-            List<Integer> numberIntList = convertStringListToIntList(numberList, Integer::parseInt);
-            List<WebElement> boxElementList = new ArrayList<WebElement>();
-            ;
-            for (int tr = 1; tr < rowsOfTheImageElement.size() + 1; tr++) {
-                for (int td = 1; td < colsOfTheImageElement.size() + 1; td++) {
-                    boxElementList.add(driver.findElement(By.xpath("//*[@id='rc-imageselect-target']/table/tbody/tr[" + tr + "]/td[" + td + "]")));
-                }
+            boolean resultOfTheVerification = false;
+            while (!resultOfTheVerification) {
+                resultOfTheVerification=takeScreenShotAndVerifyImageSquare();
             }
-            for (Integer integer : numberIntList) {
-                boxElementList.get(integer - 1).click();
-                Thread.sleep(1000);
-            }
-            driver.findElement(By.id("recaptcha-verify-button")).click();
-            Thread.sleep(3000);
-        }
-        try {
-            Assert.assertTrue(isRecaptchaSuccessful());
-            System.out.println("Completed Successfully !");
-        } catch (AssertionError e) {
-            System.out.println("Captcha has been changed! Change your proxy or retry again. Good luck.");
         }
     }
 
@@ -178,7 +149,7 @@ public class Recaptcha2Page extends DriverBase {
                 .collect(Collectors.toList());
     }
 
-    private void takeScreenShotForRecaptcha(List<WebElement> imageElements, String imgName, Integer additionalWidth, Integer additionalHeight) throws IOException {
+    private void takeScreenShot(List<WebElement> imageElements, String imgName, Integer additionalWidth, Integer additionalHeight) throws IOException {
         if (imageElements.size() > 0) {
             System.out.println("Taking screenshot of Recaptha");
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -207,5 +178,45 @@ public class Recaptcha2Page extends DriverBase {
             FileHandler.copy(screenshot, screenshotLocation);
         }
     }
+
+    private boolean takeScreenShotAndVerifyImageSquare() throws InterruptedException, IOException {
+        List<WebElement> rowsOfTheImageElement = driver.findElements(By.xpath("//*[@id='rc-imageselect-target']/table/tbody/tr"));
+        List<WebElement> colsOfTheImageElement = driver.findElements(By.xpath("//*[@id='rc-imageselect-target']/table/tbody/tr[1]/td"));
+        System.out.println("Captcha size: " + rowsOfTheImageElement.size() + "x" + colsOfTheImageElement.size());
+        List<WebElement> newImageFileElementList = driver.findElements(By.className("rc-imageselect-challenge"));
+        List<WebElement> newImageInstructionsElementList = driver.findElements(By.className("rc-imageselect-instructions"));
+        takeScreenShot(newImageFileElementList, "imageFile", 100, 100);
+        takeScreenShot(newImageInstructionsElementList, "imageInstructions", 0, 0);
+        System.out.println("CHECK select all squares");
+        String myResponse = solveImageRecatpcha(false, pageUrl, true, false, "", rowsOfTheImageElement.size(), colsOfTheImageElement.size());
+        System.out.println(myResponse);
+        myResponse = myResponse.replace("click:", "");
+        String[] numbers = myResponse.split("/");
+        List<String> numberList = Arrays.asList(numbers);
+        List<Integer> numberIntList = convertStringListToIntList(numberList, Integer::parseInt);
+        List<WebElement> boxElementList = new ArrayList<WebElement>();
+        for (int tr = 1; tr < rowsOfTheImageElement.size() + 1; tr++) {
+            for (int td = 1; td < colsOfTheImageElement.size() + 1; td++) {
+                boxElementList.add(driver.findElement(By.xpath("//*[@id='rc-imageselect-target']/table/tbody/tr[" + tr + "]/td[" + td + "]")));
+            }
+        }
+        for (Integer integer : numberIntList) {
+            boxElementList.get(integer - 1).click();
+            Thread.sleep(getRandomMillis());
+        }
+        driver.findElement(By.id("recaptcha-verify-button")).click();
+        Thread.sleep(7000);
+        if (isRecaptchaSuccessful()) {
+            System.out.println(".::Completed Challenge Successfully !");
+            return true;
+        } else {
+            System.out.println(".::Captcha has been changed! RETRYING..");
+            return false;
+        }
+    }
+    private static int getRandomMillis() {
+        return (int) (Math.random() * (4000)+200);
+    }
+
 
 }

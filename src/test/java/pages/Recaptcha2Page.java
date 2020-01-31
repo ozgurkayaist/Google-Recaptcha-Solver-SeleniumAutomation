@@ -9,7 +9,6 @@ import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -72,8 +71,6 @@ public class Recaptcha2Page extends DriverBase {
         int isInvisible = invisible ? 1 : 0;
         int isRecaptcha = recaptcha ? 1 : 0;
         int isCanvas = canvas ? 1 : 0;
-
-
         TwoCaptchaService service = new TwoCaptchaService(
                 prop.getProperty("apiKey"),
                 prop.getProperty("googleKey"),
@@ -141,14 +138,6 @@ public class Recaptcha2Page extends DriverBase {
         }
     }
 
-    private static <T, U> List<U>
-    convertStringListToIntList(List<T> listOfString,
-                               Function<T, U> function) {
-        return listOfString.stream()
-                .map(function)
-                .collect(Collectors.toList());
-    }
-
     private void takeScreenShot(List<WebElement> imageElements, String imgName, Integer additionalWidth, Integer additionalHeight) throws IOException {
         if (imageElements.size() > 0) {
             System.out.println("Taking screenshot of Recaptha");
@@ -214,8 +203,17 @@ public class Recaptcha2Page extends DriverBase {
             return false;
         }
     }
+
     private static int getRandomMillis() {
         return (int) (Math.random() * (4000)+200);
+    }
+
+    private static <T, U> List<U>
+    convertStringListToIntList(List<T> listOfString,
+                               Function<T, U> function) {
+        return listOfString.stream()
+                .map(function)
+                .collect(Collectors.toList());
     }
 
 

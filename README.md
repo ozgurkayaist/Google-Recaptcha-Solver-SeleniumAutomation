@@ -49,8 +49,7 @@ proxyPw=password
   - imageFile.gif: That's the 3x3 or 4x4 image challenge box.
   - imageInstructions.gif: That's the instructions for 2captcha.com workers. Example: "Select all images with crosswalks"
 
-![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/bots.png)
-![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/recaptcha.png)
+![alt text](https://raw.githubusercontent.com/ozgurkayaist/Google-Recaptcha-Solver-SeleniumAutomation/master/img/operation.png)
 
 # How to run?
   That's a junit-java-maven-selenium Webdriver project. Default Test folder is "src\test\java\tests\Recaptcha2Test.java" just right click on IntelliJ's project explorer window or run it from command line with maven command.

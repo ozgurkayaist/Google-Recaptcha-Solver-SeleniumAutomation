@@ -43,6 +43,8 @@ Service provides an API that allows you to solve different types of captchas.
 ##### Chrome Browser Driver
 
   - You have to download the correct driver for your operating system. There are 3 versions of the driver (Windows/Linux/Mac)
+  https://chromedriver.chromium.org/downloads
+  
   - You have to download the correct version of the driver for your Chrome Browser. Just check your browser version before download the file to this location "src\test\resources\drivers". After that you should fix the filename and extension on this file "src\test\java\base\DriverBase" 
 ```sh
 System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");

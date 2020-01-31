@@ -9,7 +9,7 @@
   - Should click I am no robot checkbox
   - Should response to invisible captcha forms
   
-Google has a demo website that includes a dummy form. This example has been tested on this demo website. url without querystring will show I am not robot. You should add "?invisible=true" at the end of the following url. This repository is compatible with all Google Recaptcha types.
+Google has a demo website that includes a dummy form. This example has been tested on this demo website. url without querystring will show I am not robot. You should add "?invisible=true" at the end of the following url. When invisible=true there will be an extra request to 2captcha.com for resolution of the invisible captcha. This repository is compatible with all Google Recaptcha types.
 
 https://www.google.com/recaptcha/api2/demo
 

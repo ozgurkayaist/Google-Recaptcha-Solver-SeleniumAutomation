@@ -179,6 +179,13 @@ public class Recaptcha2Page extends DriverBase {
         System.out.println("CHECK select all squares");
         String myResponse = solveImageRecatpcha(false, pageUrl, true, false, "", rowsOfTheImageElement.size(), colsOfTheImageElement.size());
         System.out.println(myResponse);
+        if(myResponse.contains("ERROR_CAPTCHA_UNSOLVABLE")){
+            System.out.println("ERROR_CAPTCHA_UNSOLVABLE");
+            driver.findElement(By.id("recaptcha-reload-button")).click();
+            takeScreenShotAndVerifyImageSquare();
+            Thread.sleep(7000);
+            return false;
+        }
         myResponse = myResponse.replace("click:", "");
         String[] numbers = myResponse.split("/");
         List<String> numberList = Arrays.asList(numbers);
